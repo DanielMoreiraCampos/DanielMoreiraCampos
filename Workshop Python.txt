@@ -1,0 +1,24 @@
+def soma(num1, num2):
+    return num1 + num2
+
+print(soma(1,2))
+...
+
+class Workshop:
+
+    def __init__(self, duracao, horario, tema = "Python"):
+        self.duracao = duracao
+        self.horario = horario
+        self.tema = tema
+
+    def apresentacao(self):
+        return "O Workshop de " + self.tema + " começa às " + self.horario
+
+w = Workshop("1:45", "5:30" 
+print(w.apresentacao())
+
+p = Workshop("1:45", "5:30", "Python") 
+print(w.apresentacao())
+
+r = Workshop("1:45", "5:30", "Photoshop") 
+print(w.apresentacao())

@@ -1,0 +1,71 @@
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import time
+from openpyxl import workbook
+
+class Jogo:
+
+
+    def __init__(self, casa, fora, oddCasa, oddEmpate, oddFora):
+        self.casa = casa
+        self.fora = fora
+        self.oddCasa = oddCasa
+        self.oddEmpate = oddEmpate
+        self.oddFora = oddFora
+
+    def apresentar(self):
+        return self.casa + " vs " + self.fora
+
+class WebScrap():
+
+    def __init__(self):
+        self.jogo = list()
+
+    def extrairBetpt(self):
+        driver = webdriver.Chrome(executable_path = 'c:\\Users\\Daniel Campos\\Downloads\\chromedriver.exe') //ir buscar o path da webdriver Ex: c:\\Users\\Daniel Campos\\Downloads\\chromedriver.exe
+        url = 'https://www.bet.pt/apostas-desportivas/futebol/portugal-liga-nos/'
+        driver.get(url)
+        time.sleep(5)
+
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        driver.close()
+
+        apostas = soup.find_all('div', {'class': 'rj-ev-list__ev-card__inner'})
+
+        for jogo in apostas:
+            equipas = jogo.find_all('span', {'class': 'rj-ev-list__name-text'})
+            odds = soup.find_all('span', {'class': 'rj-ev-list__bet-btn__content rj-ev-list__bet-btn__odd'})
+
+            equipaCasa = equipas[0].get_text()
+            equipaFora = equipas[1].get_text()
+            oddCasa = odds[0].get_text()
+            oddEmpate = odds[1].get_text()
+            oddFora = odds[2].get_text()
+
+            novojogo = Jogo(equipaCasa, equipaFora, oddCasa, oddEmpate, oddFora)
+            self.jogos.append(novojogo) //append é como um add do Java
+
+    def writeExcel(self):
+        book=Workbook()
+        sheet = book.active
+
+        linha = 1
+        for jogo in self.jogo:
+            sheet["C" + str(linha)] = jogo.casa
+            sheet["D" + str(linha)] = "Empate"
+            sheet["E" + str(linha)] = jogo.fora
+
+            linha = linha + 1
+
+            sheet["A" + str(linha)] = "Betpt"
+            sheet["C" + str(linha)] = jogo.oddCasa
+            sheet["D" + str(linha)] = oddEmpate
+            sheet["E" + str(linha)] = oddFora
+
+            linha = linha + 2
+
+        book.save("NovoExcel.xlsx)
+
+
+web = WebScrap()
+web.extrairBetpt()

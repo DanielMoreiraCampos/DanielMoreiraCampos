@@ -1,0 +1,50 @@
+from bs4 import BeautifulSoup
+import time
+import smtplib
+import requests
+
+
+url = 'https://www.radiopopular.pt/produto/smartphone-wiko-y51-verde'
+
+headers = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
+
+def check_price():
+    page = requests.get(url, headers = headers) //pedido http - pede ao site se pode entrar
+
+    soup = BeautifulSoup(page.content, 'html.parser') //cria um dicionario da pagina simplificando a busca de informação
+    print(soup.prettyfy)
+
+    preco = soup.find('div', {'class': 'price notranslate'})
+    preco2 = preco.get_text()
+    //print(preco2) assim ainda não é possivel comparar dois valores
+
+    preco3 = preco2.replace(",", ".")
+    print(preco3)
+
+    preco = soup.find('div', {'class': 'price notranslate'}).get_text().replace(",", ".")
+
+    return float(preco3)
+
+
+def send_email():
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465) //tem se ser uma ligação encriptada e esta é a porta disponiibilizada pelo google
+    server.login('shitdark070@gmail.com', 'DarkShit070')
+
+    subject = "Preco excelente!"
+    body = "O preco esta a baixo de 50€! Vem verificar em: " + url
+
+    msg = "Subject: " + subject + "\n\n" + body
+
+    server.sendmail('shitdark070@gmail.com', 'dccampos.c@gmail.com', msg)
+    server.quit()
+
+
+while True:
+    preco = check_price()
+
+    if preco > 50:
+        send_email()
+        exit(1)
+    else:
+        print("Preco muito alto")
+        time.sleep(5)
