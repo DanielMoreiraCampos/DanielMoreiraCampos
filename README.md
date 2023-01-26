@@ -1,10 +1,3 @@
-### Hi there 👋
-
-<!--
-**DanielMoreiraCampos/DanielMoreiraCampos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
 # 💫 About Me:
 🔭 I’m currently mastering Computer Science and Management.<br>🌱 I’m currently learning more about Digital Marketing.<br>👯 I’m looking to collaborate on Youtube or other social media platforms.<br>🤝 I’m looking for help with building a Social Media Marketing Agency.<br>📫 How to reach me: Check the social links below.<br>💬 Ask me about Computer Hardwear or any tech-related stuff.<br>⚡ Fun fact: I am in love with setup and computer building.
 
@@ -24,9 +17,6 @@ Here are some ideas to get you started:
 
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
-### 😂 Random Dev Meme
-<img src="https://random-memer.herokuapp.com/" width="512px"/>
 
 ---
 [![](https://visitcount.itsvg.in/api?id=danielmoreiracampos&icon=0&color=0)](https://visitcount.itsvg.in)
